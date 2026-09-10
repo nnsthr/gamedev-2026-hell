@@ -6,6 +6,7 @@ public class ParallaxBackground : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField, Range(0f, 1f)] private float parallaxFactor = 0.5f;
     [SerializeField] private bool loop = true;
+    [SerializeField] private bool affectVertical = false;
 
     private float spriteWidth;
     private Vector3 previousCameraPosition;
@@ -43,7 +44,8 @@ public class ParallaxBackground : MonoBehaviour
         if (cameraTransform == null) return;
 
         Vector3 delta = cameraTransform.position - previousCameraPosition;
-        Vector3 move = new Vector3(delta.x * parallaxFactor, delta.y * parallaxFactor, 0f);
+        float verticalDelta = affectVertical ? delta.y * parallaxFactor : 0f;
+        Vector3 move = new Vector3(delta.x * parallaxFactor, verticalDelta, 0f);
 
         transform.position += move;
         if (leftCopy != null) leftCopy.position += move;

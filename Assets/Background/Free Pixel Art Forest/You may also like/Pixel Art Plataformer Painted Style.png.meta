@@ -1,5 +1,13 @@
 fileFormatVersion: 2
-guid: 3cbfdae1756727d45bb7d2a8ac91b21c
+guid: e81c32e79859d9444bfeec5c6276e3cc
+AssetOrigin:
+  serializedVersion: 1
+  productId: 133112
+  packageName: Free Pixel Art Forest
+  packageVersion: 2.5
+  assetPath: Assets/Free Pixel Art Forest/You may also like/Pixel Art Plataformer
+    Painted Style.png
+  uploadId: 977418
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +42,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +80,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,10 +123,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 133112
-  packageName: Free Pixel Art Forest
-  packageVersion: 2.5
-  assetPath: Assets/Free Pixel Art Forest/PNG/Background layers/Layer_0004_Lights.png
-  uploadId: 977418

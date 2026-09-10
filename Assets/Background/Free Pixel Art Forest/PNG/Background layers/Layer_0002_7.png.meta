@@ -1,5 +1,12 @@
 fileFormatVersion: 2
-guid: 0b56cbb95caeb164e91e3f1303e95eb3
+guid: 89254c6febeb3264fb4da51c173f75ce
+AssetOrigin:
+  serializedVersion: 1
+  productId: 133112
+  packageName: Free Pixel Art Forest
+  packageVersion: 2.5
+  assetPath: Assets/Free Pixel Art Forest/PNG/Background layers/Layer_0002_7.png
+  uploadId: 977418
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -115,10 +122,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 133112
-  packageName: Free Pixel Art Forest
-  packageVersion: 2.5
-  assetPath: Assets/Free Pixel Art Forest/PNG/Background layers/Layer_0008_3.png
-  uploadId: 977418
