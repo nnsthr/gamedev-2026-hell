@@ -12277,7 +12277,6 @@ GameObject:
   - component: {fileID: 1661335714}
   - component: {fileID: 1661335713}
   - component: {fileID: 1661335712}
-  - component: {fileID: 1661335711}
   m_Layer: 0
   m_Name: chara1 2_0
   m_TagString: Player
@@ -12285,27 +12284,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1661335711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661335710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d699106686c322c4284d09bb82f7878c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 5
-  jumpForce: 16
-  groundCheck: {fileID: 824919565}
-  groundCheckRadius: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  fallGravityMultiplier: 1.5
-  lowJumpGravityMultiplier: 1.3
 --- !u!61 &1661335712
 BoxCollider2D:
   m_ObjectHideFlags: 0
