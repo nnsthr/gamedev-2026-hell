@@ -29,6 +29,7 @@ public class DirectorController : MonoBehaviour
         remainHP = player.GetComponent<PlayerController>().CheckremainHP();
         score = player.GetComponent<PlayerController>().CheckplScore();
 
+        //表示する
         scoredigit=scoredigit.Remove(7-(score==0?1:(int)Math.Log10(score)))+score.ToString();
         timerscoreText.GetComponent<TextMeshProUGUI>().text = "Time "+ (timermin<=9?"0":"") + timermin.ToString() + "." + (timersec<10?"0":"") + timersec.ToString("F2") + "\nScore " + scoredigit;
         lifeText.GetComponent<TextMeshProUGUI>().text = "HP : " + remainHP.ToString() + "\nLife x " + remainLife.ToString();

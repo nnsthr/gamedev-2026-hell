@@ -3,41 +3,46 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rigit2D;
-    public GameObject plGround;
-    public GameObject rightWall;
-    public GameObject leftWall;
-    float WalkingAcceleration=70f;
-    float WalkingMaxSpeed=7f;
-    float JumpAcceleration=600f;
-    float WallKickAcceleration=400f;
-    float WallKickJumpAcceleration=630f;
-    float StopMultiplier=0.2f;
-    float jumpBuffer=0.1f;
-    float AttackBlowback=400f;
-    int plHP=3;
-    int plScore=0;
+    Rigidbody2D rb;
+    [SerializeField]GameObject plGround;
+    [SerializeField]GameObject rightWall;
+    [SerializeField]GameObject leftWall;
+    [SerializeField]float WalkingAccelerationGround=80f;
+    [SerializeField]float WalkingMaxSpeedGround=7f;
+    [SerializeField]float WalkingAccelerationSky=15f;
+    [SerializeField]float WalkingMaxSpeedSky=7f;
+    [SerializeField]float JumpAcceleration=600f;
+    [SerializeField]float WallKickAcceleration=400f;
+    [SerializeField]float WallKickJumpAcceleration=630f;
+    [SerializeField]float StopMultiplier=0.2f;
+    [SerializeField]float jumpBuffer=0.1f;
+    [SerializeField]float AttackBlowback=400f;
+    [SerializeField]int plHP=3;
+    [SerializeField]int plScore=0;
     bool isGround = false;
     bool isrightWall = false;
     bool isleftWall = false;
     float SpacekeyPressedTime=-999f;
+    float WalkingMaxSpeed=7f;
+    float WalkingAcceleration=80f;
+
     void Start()
     {
         Application.targetFrameRate=60;
-        this.rigit2D=GetComponent<Rigidbody2D>();
+        this.rb=GetComponent<Rigidbody2D>();
     }
     void Update()
     {
         //空中の操作を鈍化
         if (isGround)
         {
-            WalkingMaxSpeed=7f;
-            WalkingAcceleration=80f;
+            WalkingMaxSpeed=WalkingMaxSpeedGround;
+            WalkingAcceleration=WalkingAccelerationGround;
         }
         else
         {
-            WalkingMaxSpeed=5f;
-            WalkingAcceleration=15f;
+            WalkingMaxSpeed=WalkingMaxSpeedSky;
+            WalkingAcceleration=WalkingAccelerationSky;
         }
         //jump,buffered
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
@@ -47,44 +52,43 @@ public class PlayerController : MonoBehaviour
         bool canbuffer = Time.time-SpacekeyPressedTime<=jumpBuffer;
         if (isGround && canbuffer) 
         {
-            rigit2D.AddForce(transform.up*JumpAcceleration);
+            rb.AddForce(transform.up*JumpAcceleration);
             //reset SpacekeyPressedTime
             SpacekeyPressedTime=-1*jumpBuffer;
         }
         //go right
-        if (Keyboard.current.rightArrowKey.isPressed && this.rigit2D.linearVelocityX <= WalkingMaxSpeed)
+        if (Keyboard.current.rightArrowKey.isPressed && this.rb.linearVelocityX <= WalkingMaxSpeed)
         {
-            rigit2D.AddForce(transform.right*WalkingAcceleration);
+            rb.AddForce(transform.right*WalkingAcceleration);
         }
         //go left
-        if (Keyboard.current.leftArrowKey.isPressed && this.rigit2D.linearVelocityX >= WalkingMaxSpeed*-1)
+        if (Keyboard.current.leftArrowKey.isPressed && this.rb.linearVelocityX >= WalkingMaxSpeed*-1)
         {
-            rigit2D.AddForce(transform.right*-1*WalkingAcceleration);
+            rb.AddForce(transform.right*-1*WalkingAcceleration);
         }
         //Stop
         if((Keyboard.current.rightArrowKey.wasReleasedThisFrame || Keyboard.current.leftArrowKey.wasReleasedThisFrame) && isGround)
         {
-            rigit2D.linearVelocityX *= StopMultiplier;
+            rb.linearVelocityX *= StopMultiplier;
         }
         //壁ズリ、壁ジャン
-        //壁ジャンと同時に床を踏むとめっちゃ飛ぶ
-        if (isrightWall && !isGround && rigit2D.linearVelocityY<=0 && Keyboard.current.rightArrowKey.isPressed)
+        //壁ジャンと同時に床を踏むとめっちゃ飛ぶ まあええやろ
+        if (isrightWall && !isGround && rb.linearVelocityY<=0 && Keyboard.current.rightArrowKey.isPressed)
         {
-            rigit2D.linearVelocityY=-1.5f;
+            rb.linearVelocityY=-1.5f;
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                rigit2D.AddForce(new Vector2(WallKickAcceleration*-1,WallKickJumpAcceleration));
+                rb.AddForce(new Vector2(WallKickAcceleration*-1,WallKickJumpAcceleration));
             }
         }
-        if (isleftWall && !isGround && rigit2D.linearVelocityY<=0 && Keyboard.current.leftArrowKey.isPressed)
+        if (isleftWall && !isGround && rb.linearVelocityY<=0 && Keyboard.current.leftArrowKey.isPressed)
         {
-            rigit2D.linearVelocityY=-1.5f;
+            rb.linearVelocityY=-1.5f;
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                rigit2D.AddForce(new Vector2(WallKickAcceleration,WallKickJumpAcceleration));
+                rb.AddForce(new Vector2(WallKickAcceleration,WallKickJumpAcceleration));
             }
         }
-        Debug.Log(attackornot);
     }
     void FixedUpdate()
     {
@@ -95,16 +99,15 @@ public class PlayerController : MonoBehaviour
         isleftWall = leftWall.GetComponent<WallDetector>().IsWall();
     }
     //踏みつけ、被ダメージ
-    //２回踏まないと消えないバグ,attackornotの扱いを要修正
-    bool attackornot=false;
+    public bool attackornot=false;
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            if (plGround.GetComponent<PlayerOnGroundChecker>().IsEnemy() && rigit2D.linearVelocityY<=0)
+            if (plGround.GetComponent<PlayerOnGroundChecker>().IsEnemy() && rb.linearVelocityY<=0)
             {
                 Debug.Log("attacked");
-                rigit2D.AddForce(transform.up*AttackBlowback);
+                rb.AddForce(transform.up*AttackBlowback);
                 plScore += 100;
                 attackornot=true;
             }
