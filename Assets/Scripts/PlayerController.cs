@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
+using Cysharp.Threading.Tasks;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float AttackBlowback=400f;
     [SerializeField]int plHP=3;
     [SerializeField]int plScore=0;
+    [SerializeField]float MutekiTime=2f;
     bool isGround = false;
     bool isrightWall = false;
     bool isleftWall = false;
@@ -114,10 +117,12 @@ public class PlayerController : MonoBehaviour
             else
             {
                 Debug.Log("damaged");
-                plHP--;
-                //被攻撃時無敵状態,未完成
-                gameObject.GetComponent<Collider2D>().excludeLayers = LayerMask.GetMask("unpushableEnemy");
                 attackornot=false;
+                plHP--;
+                //被攻撃時無敵状態
+                //敵の中で無敵状態解除すると2回ダメージ受けて無敵状態になるバグ
+                gameObject.GetComponent<Collider2D>().excludeLayers = LayerMask.GetMask("unpushableEnemy");
+                Invoke(nameof(ToggleMuteki),MutekiTime);
             }
         }
     }
@@ -134,5 +139,10 @@ public class PlayerController : MonoBehaviour
     public int CheckplScore()
     {
         return plScore;
+    }
+    void ToggleMuteki()
+    {
+        gameObject.GetComponent<Collider2D>().excludeLayers &= ~LayerMask.GetMask("unpushableEnemy");
+        Debug.Log("not muteki");
     }
 }

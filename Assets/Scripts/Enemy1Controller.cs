@@ -4,15 +4,15 @@ using UnityEngine;
 public class Enemy1Controller : MonoBehaviour
 {
     GameObject player;
-    public GameObject onGroundRight;
-    public GameObject onGroundLeft;
-    public GameObject rightWall;
-    public GameObject leftWall;
+    [SerializeField]GameObject onGroundRight;
+    [SerializeField]GameObject onGroundLeft;
+    [SerializeField]GameObject rightWall;
+    [SerializeField]GameObject leftWall;
     Rigidbody2D rb;
     PlayerController pl;
-    float WalkingSpeed=1f;
+    [SerializeField]float WalkingSpeed=1f;
     int walkdirection = 1;
-    int enHP = 1;
+    [SerializeField]int enHP = 1;
     void Start()
     {
         this.player = GameObject.Find("player");

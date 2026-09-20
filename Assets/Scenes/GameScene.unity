@@ -238,6 +238,8 @@ MonoBehaviour:
   onGroundLeft: {fileID: 1746482922}
   rightWall: {fileID: 207268811}
   leftWall: {fileID: 1988129404}
+  WalkingSpeed: 1
+  enHP: 1
 --- !u!50 &118382544
 Rigidbody2D:
   serializedVersion: 5
@@ -334,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 118382540}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.86, y: -2.111, z: 0}
+  m_LocalPosition: {x: 5.87, y: 3.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3422,6 +3424,8 @@ MonoBehaviour:
   onGroundLeft: {fileID: 139988527}
   rightWall: {fileID: 1426038763}
   leftWall: {fileID: 2129720080}
+  WalkingSpeed: 1
+  enHP: 1
 --- !u!58 &1788881190
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3642,6 +3646,7 @@ MonoBehaviour:
   AttackBlowback: 400
   plHP: 3
   plScore: 0
+  MutekiTime: 3
   attackornot: 0
 --- !u!50 &1969289237
 Rigidbody2D:
@@ -3739,7 +3744,7 @@ Transform:
   m_GameObject: {fileID: 1969289235}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.52, y: 21.49, z: 0}
+  m_LocalPosition: {x: 3.52, y: 3.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4223,11 +4228,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4631264417950940910, guid: e8576c6d43cdd9d499ac3c8159053b6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.52
+      value: 3.52
       objectReference: {fileID: 0}
     - target: {fileID: 4631264417950940910, guid: e8576c6d43cdd9d499ac3c8159053b6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.49
+      value: 3.56
       objectReference: {fileID: 0}
     - target: {fileID: 4631264417950940910, guid: e8576c6d43cdd9d499ac3c8159053b6d, type: 3}
       propertyPath: m_LocalPosition.z
